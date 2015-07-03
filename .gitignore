@@ -1,12 +1,12 @@
-# Created by .gitignore support plugin (hsz.mobi)
-### JetBrains template
+# Created by https://www.gitignore.io
+
+### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
 
 ## Directory-based project format:
 .idea/
-# if you remove the above rule, at least ignore the following:
 
 ## File-based project format:
 *.ipr
@@ -15,12 +15,12 @@
 ## Plugin-specific files:
 
 # IntelliJ
-out/
+/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
-### Eclipse template
+### Eclipse ###
 *.pydevproject
 .metadata
 .gradle
@@ -34,6 +34,9 @@ local.properties
 .settings/
 .loadpath
 
+# Eclipse Core
+.project
+
 # External tool builders
 .externalToolBuilders/
 
@@ -43,14 +46,22 @@ local.properties
 # CDT-specific
 .cproject
 
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
 # PDT-specific
 .buildpath
 
-# sbteclipse plugin
-.target
+### Java ###
+*.class
 
-# TeXlipse plugin
-.texlipse
+# Package Files #
+*.jar
+*.war
+*.ear
 
-## Vagrant ##
+### Maven ###
+target/
+
+### Vagrant ###
 .vagrant/
