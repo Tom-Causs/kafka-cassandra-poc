@@ -9,7 +9,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	# within the machine from a port on the host machine. In the example below,
 	# accessing "localhost:8080" will access port 80 on the guest machine.
 	# config.vm.network "forwarded_port", guest: 80, host: 8080
+    config.vm.network :forwarded_port, guest: 9092, host: 9092   # kafka
+    config.vm.network :forwarded_port, guest: 2181, host: 2181   # zookeeper
  
+    # Create a private network, which allows host-only access to the machine
+    # using a specific IP.
+    config.vm.network "private_network", ip: "192.168.33.10"
+    
 	# Set virtual machine memory size
 	config.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--memory", "2048"]
