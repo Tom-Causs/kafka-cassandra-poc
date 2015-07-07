@@ -22,3 +22,9 @@ wget -q http://apache.cu.be/kafka/0.8.2.0/kafka_2.10-0.8.2.0.tgz
 tar xf kafka_2.10-0.8.2.0.tgz
 mv kafka_2.10-0.8.2.0 kafka
 cd kafka/
+mkdir logs/
+chmod 777 logs/
+
+# configure kafka/zookeeper
+sed -i "s|^zookeeper.connect=localhost:2181|zookeeper.connect=192.168.33.10:2181|;s|^#host.name=localhost|host.name=192.168.33.10|" config/server.properties
+
