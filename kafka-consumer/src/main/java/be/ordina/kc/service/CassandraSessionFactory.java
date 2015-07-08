@@ -12,7 +12,7 @@ import com.datastax.driver.core.exceptions.InvalidQueryException;
 import com.datastax.driver.core.exceptions.NoHostAvailableException;
 
 @Service
-public class CassandraSessionFactory {
+public class CassandraSessionFactory implements SessionFactory {
 
 	private static final String HOST_URL = "192.168.33.10";
 	private static final String DATABASE = "messages";

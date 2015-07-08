@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KafkaConsumerService {
+public class KafkaConsumerService implements ConsumerService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerService.class);
 	
