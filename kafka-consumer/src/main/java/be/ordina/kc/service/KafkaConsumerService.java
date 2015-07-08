@@ -1,4 +1,4 @@
-package be.ordina.kc;
+package be.ordina.kc.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,20 +15,24 @@ import kafka.utils.VerifiableProperties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-public class ConsumerExample {
+@Service
+public class KafkaConsumerService {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(ConsumerExample.class);
+	private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerService.class);
 	
+	private static final String ZOOKEEPER_HOST = "192.168.33.10:2181";
+	private static final String GROUP_ID = "ordina";
 	private static final String TOPIC = "dropbox";
 	
 	private ConsumerConnector consumer;
 
-    public ConsumerExample() {
+    public KafkaConsumerService() {
     	consumer = Consumer.createJavaConsumerConnector(createConsumerConfig());
     }
     
-    public void runConsumer() throws InterruptedException {
+    public void consumeMessages() {
         Map<String, Integer> topicCountMap = new HashMap<>();
         StringDecoder decoder = new StringDecoder(new VerifiableProperties());
         topicCountMap.put(TOPIC, 1);
@@ -38,8 +42,6 @@ public class ConsumerExample {
         ConsumerIterator<String, String> it = stream.iterator();
         
         while(it.hasNext()) {
-        	Thread.sleep(1000);
-        	
         	String message = it.next().message();
         	LOG.info("message: {}", message);
         	
@@ -57,8 +59,9 @@ public class ConsumerExample {
     
     private static ConsumerConfig createConsumerConfig() {
         Properties props = new Properties();
-        props.put("zookeeper.connect", "192.168.33.10:2181");
-        props.put("group.id", "ordina");
+        props.put("zookeeper.connect", ZOOKEEPER_HOST);
+        props.put("group.id", GROUP_ID);
+        props.put("zookeeper.session.timeout.ms", "500");
 
         return new ConsumerConfig(props);
     }
