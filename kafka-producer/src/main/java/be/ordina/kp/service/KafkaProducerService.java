@@ -2,7 +2,6 @@ package be.ordina.kp.service;
 
 import java.util.Date;
 import java.util.Properties;
-import java.util.Random;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -13,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import be.ordina.kp.model.Message;
+import be.ordina.kp.util.AddressUtil;
+
 @Service
 public class KafkaProducerService implements ProducerService {
 	
@@ -20,7 +22,9 @@ public class KafkaProducerService implements ProducerService {
 	
 	private static final String KAFKA_URL = "192.168.33.10:9092";
 	private static final String TOPIC = "dropbox";
-
+	
+	Producer<String, String> producer;
+	
 	public void produceMessages() {
         Properties props = new Properties();
         
@@ -28,25 +32,45 @@ public class KafkaProducerService implements ProducerService {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         
-        Producer<String, String> producer = new KafkaProducer<>(props);
+        producer = new KafkaProducer<>(props);
         
-        String msg = generateMessage();
+        long start = System.currentTimeMillis();
         
-        ProducerRecord<String, String> data = new ProducerRecord<String, String>(TOPIC, msg);
+        // send start signal so consumer can start the timer
+        sendMessage(TOPIC, "[START]");
+
+    	// generate random messages
+        for (int i = 0; i < 10; i++) {
+            sendMessage(TOPIC, generateMessage());
+		}
         
-        LOG.debug("sending message: {}", msg);
-        producer.send(data);
+        // stop the timer
+        sendMessage(TOPIC, "[END]");
         
         LOG.trace("closing connection...");
         producer.close();
+        
+        long end = System.currentTimeMillis();
+        
+        LOG.trace("elapsed time: {}ms", (end - start));
     }
+	
+	private void sendMessage(String topic, String message) {
+        ProducerRecord<String, String> data = new ProducerRecord<String, String>(topic, message);
+        
+        LOG.debug("sending message: {}", message);
+        producer.send(data);
+	}
 
 	private static String generateMessage() {
-		Random rnd = new Random();
-        long runtime = new Date().getTime();
-        String ip = "192.168.2." + rnd.nextInt(255);
-        String message = runtime + ",www.example.com," + ip;
+        long timestamp = new Date().getTime();
         
-        return message;
+        Message message = new Message();
+        message.setTimestamp(timestamp);
+        message.setStreet(AddressUtil.generateStreet());
+        message.setCity(AddressUtil.generateCity());
+        message.setIpAddress(AddressUtil.generateIpAddress());
+        
+        return message.toString();
 	}
 }
