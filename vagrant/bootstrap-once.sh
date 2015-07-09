@@ -27,4 +27,3 @@ chmod 777 logs/
 
 # configure kafka/zookeeper
 sed -i "s|^zookeeper.connect=localhost:2181|zookeeper.connect=192.168.33.10:2181|;s|^#host.name=localhost|host.name=192.168.33.10|" config/server.properties
-
