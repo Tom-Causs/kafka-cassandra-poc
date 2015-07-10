@@ -22,6 +22,7 @@ public class KafkaProducerService implements ProducerService {
 	
 	private static final String KAFKA_URL = "192.168.33.10:9092";
 	private static final String TOPIC = "dropbox";
+	private static final int MESSAGE_COUNT = 10000;
 	
 	Producer<String, String> producer;
 	
@@ -40,7 +41,7 @@ public class KafkaProducerService implements ProducerService {
         sendMessage(TOPIC, "[START]");
 
     	// generate random messages
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < MESSAGE_COUNT; i++) {
             sendMessage(TOPIC, generateMessage());
 		}
         
