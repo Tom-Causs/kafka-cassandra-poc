@@ -23,7 +23,7 @@ cd ..
 
 echo "setting up Kafka..."
 wget -q http://apache.cu.be/kafka/0.8.2.0/kafka_2.10-0.8.2.0.tgz
-tar xf kafka_2.10-0.8.2.0.tgz
+tar -zxf kafka_2.10-0.8.2.0.tgz
 mv kafka_2.10-0.8.2.0 kafka
 cd kafka/
 mkdir logs/

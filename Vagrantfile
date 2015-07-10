@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end 
  
 	config.vm.provision "shell", path: "vagrant/bootstrap-once.sh"
-	#config.vm.provision "shell", path: "vagrant/bootstrap-always.sh", run: "always"
+	config.vm.provision "shell", path: "vagrant/bootstrap-always.sh", run: "always"
 
     # remove tty errors in console
     config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"

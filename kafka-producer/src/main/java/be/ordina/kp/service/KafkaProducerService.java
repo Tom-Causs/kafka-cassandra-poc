@@ -40,7 +40,7 @@ public class KafkaProducerService implements ProducerService {
         sendMessage(TOPIC, "[START]");
 
     	// generate random messages
-        for (int i = 0; i < 20000; i++) {
+        for (int i = 0; i < 10000; i++) {
             sendMessage(TOPIC, generateMessage());
 		}
         
