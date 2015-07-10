@@ -11,8 +11,8 @@ The app consists of two parts:
    - Java 8
    - Git
    - Maven
-   - VirtualBox
-   - Vagrant
+   - [VirtualBox]
+   - [Vagrant]
 
 ### Setup
 
