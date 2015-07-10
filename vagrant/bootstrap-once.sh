@@ -7,9 +7,9 @@ echo "setting up java..."
 apt-get install -y -qq openjdk-7-jre-headless > /dev/null
 
 echo "setting up Cassandra..."
-wget -q http://apache.cu.be/cassandra/2.1.7/apache-cassandra-2.1.7-bin.tar.gz
-tar zxf apache-cassandra-2.1.7-bin.tar.gz
-mv apache-cassandra-2.1.7 cassandra
+wget -q http://www.eu.apache.org/dist/cassandra/2.1.8/apache-cassandra-2.1.8-bin.tar.gz
+tar -zxf apache-cassandra-2.1.8-bin.tar.gz
+mv apache-cassandra-2.1.8 cassandra
 cd cassandra/
 mkdir logs/
 chmod 777 logs/
