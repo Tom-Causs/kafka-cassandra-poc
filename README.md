@@ -16,11 +16,11 @@ The app consists of two parts:
 
 ### Setup
 
-To run the app, first execute the following cmd from the project root:
-	```sh
-	vagrant up
-	```
-	This will start up the Vagrant box. The first time will take a while as it has to download the OS image and other dependencies.
+  To run the app, first execute the following cmd from the project root:
+  ```sh
+  vagrant up
+  ```
+  This will start up the Vagrant box. The first time will take a while as it has to download the OS image and other dependencies.
   
   To start-up the producer app, run the following cmd from the **kafka-producer** folder: 
   ```sh
@@ -34,10 +34,10 @@ To run the app, first execute the following cmd from the project root:
   ```
   _Note: the consumer will keep listening for new messages until manually terminated_
   
-	Shutting down the vagrant box can be done by typing
-	```sh
-	vagrant halt
-	```
+  Shutting down the vagrant box can be done by typing
+  ```sh
+  vagrant halt
+  ```
 
 
 ### Misc. commands
