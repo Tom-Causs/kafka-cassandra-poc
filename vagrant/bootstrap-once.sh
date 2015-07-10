@@ -11,6 +11,10 @@ wget -q http://apache.cu.be/cassandra/2.1.7/apache-cassandra-2.1.7-bin.tar.gz
 tar zxf apache-cassandra-2.1.7-bin.tar.gz
 mv apache-cassandra-2.1.7 cassandra
 cd cassandra/
+mkdir logs/
+chmod 777 logs/
+mkdir data/
+chmod 777 data/
 
 # configure cassandra
 sed -i "s|^rpc_address: localhost|rpc_address: 0.0.0.0|;s|^# broadcast_rpc_address: 1.2.3.4|broadcast_rpc_address: 1.2.3.4|" conf/cassandra.yaml
