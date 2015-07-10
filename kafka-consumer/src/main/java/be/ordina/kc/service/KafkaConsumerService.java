@@ -1,6 +1,5 @@
 package be.ordina.kc.service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,7 @@ public class KafkaConsumerService implements ConsumerService {
 	
 	private static long startTime;
 	private static long endTime;
+	private static long messageId;
 	
 	@Autowired
 	private MessageService messageService;
@@ -78,9 +78,9 @@ public class KafkaConsumerService implements ConsumerService {
     }
     
     private void saveMessage(String message) {
-    	long id = new Date().getTime();
-    	messageService.saveMessage(id, message);
-    	LOG.trace("saving message with id: {}, text: {}", id, message);
+    	messageService.saveMessage(messageId, message);
+    	// id's are incremental, so at every startup it will reset and overwrite old db records
+    	messageId++;
     }
     
     private ConsumerConfig createConsumerConfig() {
